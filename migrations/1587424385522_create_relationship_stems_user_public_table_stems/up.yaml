@@ -1,0 +1,13 @@
+- args:
+    name: stems_user
+    table:
+      name: stems
+      schema: public
+    using:
+      manual_configuration:
+        column_mapping:
+          userId: id
+        remote_table:
+          name: users
+          schema: public
+  type: create_object_relationship
