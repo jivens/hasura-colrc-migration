@@ -1,0 +1,6 @@
+- args:
+    relationship: bibliographies_user
+    table:
+      name: bibliographies
+      schema: public
+  type: drop_relationship

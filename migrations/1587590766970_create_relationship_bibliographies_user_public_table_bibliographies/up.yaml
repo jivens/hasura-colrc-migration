@@ -1,0 +1,13 @@
+- args:
+    name: bibliographies_user
+    table:
+      name: bibliographies
+      schema: public
+    using:
+      manual_configuration:
+        column_mapping:
+          userId: id
+        remote_table:
+          name: users
+          schema: public
+  type: create_object_relationship
