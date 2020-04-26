@@ -1,0 +1,6 @@
+- args:
+    relationship: audioset_audiosetmetadata
+    table:
+      name: audiosets
+      schema: public
+  type: drop_relationship

@@ -1,0 +1,10 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: |-
+      alter table "public"."audiosets"
+                 add constraint "audiosets_textId_fkey"
+                 foreign key ("textId")
+                 references "public"."texts"
+                 ("id") on update restrict on delete restrict;
+  type: run_sql
