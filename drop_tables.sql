@@ -1,0 +1,1 @@
+DROP TABLE affixes, audiofiles, audiosetmetadata, audiosets, bibliographies, consonants, elicitationfiles, elicitationsets, roles, roots, spellings, stems, textfilemetadata, textfiles, textimages, texts, users, vowels;
