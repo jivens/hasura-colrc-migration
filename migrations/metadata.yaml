@@ -1,0 +1,211 @@
+version: 2
+tables:
+- table:
+    schema: public
+    name: affixes
+  object_relationships:
+  - name: affix_user
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: users
+        column_mapping:
+          userId: id
+  insert_permissions:
+  - role: user
+    permission:
+      check:
+        _exists:
+          _where:
+            _and:
+            - id:
+                _eq: X-Hasura-User-Id
+            - roles:
+                _like: '%admin%'
+          _table:
+            schema: public
+            name: users
+      set:
+        createdAt: now()
+        updatedAt: now()
+      columns:
+      - id
+      - prevId
+      - userId
+      - active
+      - editnote
+      - english
+      - link
+      - nicodemus
+      - page
+      - salish
+      - type
+      - createdAt
+      - updatedAt
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - type
+      - salish
+      - nicodemus
+      - english
+      - link
+      - page
+      - editnote
+      - active
+      - prevId
+      - userId
+      - createdAt
+      - updatedAt
+      filter: {}
+- table:
+    schema: public
+    name: audiofiles
+  object_relationships:
+  - name: audiofiles_audiosets
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: audiosets
+        column_mapping:
+          audiosetId: id
+- table:
+    schema: public
+    name: audiosetmetadata
+  object_relationships:
+  - name: audiosetmeta_audioset
+    using:
+      foreign_key_constraint_on: audioSetId
+- table:
+    schema: public
+    name: audiosets
+  object_relationships:
+  - name: audioset_text
+    using:
+      foreign_key_constraint_on: textId
+  array_relationships:
+  - name: audioset_audiosetmetadata
+    using:
+      foreign_key_constraint_on:
+        column: audioSetId
+        table:
+          schema: public
+          name: audiosetmetadata
+  - name: audiosets_audiofiles
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: audiofiles
+        column_mapping:
+          id: audiosetId
+- table:
+    schema: public
+    name: bibliographies
+  object_relationships:
+  - name: bibliographies_user
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: users
+        column_mapping:
+          userId: id
+- table:
+    schema: public
+    name: consonants
+- table:
+    schema: public
+    name: elicitationfiles
+- table:
+    schema: public
+    name: elicitationsets
+- table:
+    schema: public
+    name: roles
+- table:
+    schema: public
+    name: roots
+  object_relationships:
+  - name: roots_user
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: users
+        column_mapping:
+          userId: id
+- table:
+    schema: public
+    name: spellings
+- table:
+    schema: public
+    name: stems
+  object_relationships:
+  - name: stems_user
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: users
+        column_mapping:
+          userId: id
+- table:
+    schema: public
+    name: textfilemetadata
+  object_relationships:
+  - name: textfilemeta_textfile
+    using:
+      foreign_key_constraint_on: textFileId
+- table:
+    schema: public
+    name: textfiles
+  array_relationships:
+  - name: textfile_textfilemetadata
+    using:
+      foreign_key_constraint_on:
+        column: textFileId
+        table:
+          schema: public
+          name: textfilemetadata
+- table:
+    schema: public
+    name: textimages
+- table:
+    schema: public
+    name: texts
+  array_relationships:
+  - name: text_audiosets
+    using:
+      foreign_key_constraint_on:
+        column: textId
+        table:
+          schema: public
+          name: audiosets
+- table:
+    schema: public
+    name: users
+  array_relationships:
+  - name: users_roots
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: roots
+        column_mapping:
+          id: userId
+  - name: users_stems
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: stems
+        column_mapping:
+          id: userId
+- table:
+    schema: public
+    name: vowels
