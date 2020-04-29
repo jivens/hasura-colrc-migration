@@ -1,6 +1,0 @@
-- args:
-    relationship: stems_user
-    table:
-      name: stems
-      schema: public
-  type: drop_relationship

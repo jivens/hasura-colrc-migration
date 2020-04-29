@@ -1,6 +1,0 @@
-- args:
-    relationship: affix_user
-    table:
-      name: affixes
-      schema: public
-  type: drop_relationship

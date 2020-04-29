@@ -1,8 +1,0 @@
-- args:
-    name: audioset_text
-    table:
-      name: audiosets
-      schema: public
-    using:
-      foreign_key_constraint_on: textId
-  type: create_object_relationship

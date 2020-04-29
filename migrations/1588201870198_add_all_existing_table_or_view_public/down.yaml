@@ -1,0 +1,90 @@
+- args:
+    table:
+      name: affixes
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: audiofiles
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: audiosetmetadata
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: audiosets
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: bibliographies
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: consonants
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: elicitationfiles
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: elicitationsets
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: roles
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: roots
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: spellings
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: stems
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: textfilemetadata
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: textfiles
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: textimages
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: texts
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: users
+      schema: public
+  type: untrack_table
+- args:
+    table:
+      name: vowels
+      schema: public
+  type: untrack_table
