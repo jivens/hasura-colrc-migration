@@ -1,0 +1,10 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: |-
+      alter table "public"."elicitationfiles"
+                 add constraint "elicitationfiles_elicitationSetId_fkey"
+                 foreign key ("elicitationSetId")
+                 references "public"."elicitationsets"
+                 ("id") on update restrict on delete restrict;
+  type: run_sql

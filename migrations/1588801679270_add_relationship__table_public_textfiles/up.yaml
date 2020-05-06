@@ -1,0 +1,12 @@
+- args:
+    name: textimages
+    table:
+      name: textfiles
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: textFileId
+        table:
+          name: textimages
+          schema: public
+  type: create_array_relationship

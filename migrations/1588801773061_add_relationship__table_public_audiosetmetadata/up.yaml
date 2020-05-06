@@ -1,0 +1,8 @@
+- args:
+    name: audioset
+    table:
+      name: audiosetmetadata
+      schema: public
+    using:
+      foreign_key_constraint_on: audioSetId
+  type: create_object_relationship

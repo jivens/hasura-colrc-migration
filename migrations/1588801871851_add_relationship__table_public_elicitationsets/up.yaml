@@ -1,0 +1,12 @@
+- args:
+    name: elicitationfiles
+    table:
+      name: elicitationsets
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: elicitationSetId
+        table:
+          name: elicitationfiles
+          schema: public
+  type: create_array_relationship
