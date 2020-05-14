@@ -3,6 +3,69 @@ tables:
 - table:
     schema: public
     name: affixes
+  object_relationships:
+  - name: affix_user
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: users
+        column_mapping:
+          userId: id
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
+  insert_permissions:
+  - role: user
+    permission:
+      check:
+        _exists:
+          _where:
+            _and:
+            - userId:
+                _eq: X-Hasura-User-Id
+            - role:
+                _eq: admin
+          _table:
+            schema: public
+            name: user_roles
+      set:
+        createdAt: now()
+        active: "Y"
+        userId: x-hasura-User-Id
+        updatedAt: now()
+      columns:
+      - id
+      - prevId
+      - userId
+      - active
+      - editnote
+      - english
+      - link
+      - nicodemus
+      - page
+      - salish
+      - type
+      - createdAt
+      - updatedAt
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - type
+      - salish
+      - nicodemus
+      - english
+      - link
+      - page
+      - editnote
+      - active
+      - prevId
+      - userId
+      - createdAt
+      - updatedAt
+      filter: {}
 - table:
     schema: public
     name: audiofiles
@@ -15,13 +78,47 @@ tables:
           name: audiosets
         column_mapping:
           audiosetId: id
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
 - table:
     schema: public
     name: audiosetmetadata
+  object_relationships:
+  - name: audioset
+    using:
+      foreign_key_constraint_on: audioSetId
+  - name: audiosetmeta_audioset
+    using:
+      foreign_key_constraint_on: audioSetId
 - table:
     schema: public
     name: audiosets
+  object_relationships:
+  - name: audioset_text
+    using:
+      foreign_key_constraint_on: textId
+  - name: text
+    using:
+      foreign_key_constraint_on: textId
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
   array_relationships:
+  - name: audioset_audiosetmetadata
+    using:
+      foreign_key_constraint_on:
+        column: audioSetId
+        table:
+          schema: public
+          name: audiosetmetadata
+  - name: audiosetmetadata
+    using:
+      foreign_key_constraint_on:
+        column: audioSetId
+        table:
+          schema: public
+          name: audiosetmetadata
   - name: audiosets_audiofiles
     using:
       manual_configuration:
@@ -33,18 +130,57 @@ tables:
 - table:
     schema: public
     name: bibliographies
+  object_relationships:
+  - name: bibliographies_user
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: users
+        column_mapping:
+          userId: id
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
 - table:
     schema: public
     name: consonants
 - table:
     schema: public
     name: elicitationfiles
+  object_relationships:
+  - name: elicitationset
+    using:
+      foreign_key_constraint_on: elicitationSetId
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
 - table:
     schema: public
     name: elicitationsets
+  object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
+  array_relationships:
+  - name: elicitationfiles
+    using:
+      foreign_key_constraint_on:
+        column: elicitationSetId
+        table:
+          schema: public
+          name: elicitationfiles
 - table:
     schema: public
     name: roles
+  array_relationships:
+  - name: user_roles
+    using:
+      foreign_key_constraint_on:
+        column: role
+        table:
+          schema: public
+          name: user_roles
 - table:
     schema: public
     name: roots
@@ -57,15 +193,41 @@ tables:
           name: users
         column_mapping:
           userId: id
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
 - table:
     schema: public
     name: spellings
+  object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
 - table:
     schema: public
     name: stems
+  object_relationships:
+  - name: stems_user
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: users
+        column_mapping:
+          userId: id
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
 - table:
     schema: public
     name: textfilemetadata
+  object_relationships:
+  - name: textfile
+    using:
+      foreign_key_constraint_on: textFileId
+  - name: textfilemeta_textfile
+    using:
+      foreign_key_constraint_on: textFileId
 - table:
     schema: public
     name: textfiles
@@ -78,13 +240,63 @@ tables:
           name: texts
         column_mapping:
           textId: id
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
+  array_relationships:
+  - name: textfilemetadata
+    using:
+      foreign_key_constraint_on:
+        column: textFileId
+        table:
+          schema: public
+          name: textfilemetadata
+  - name: textfile_textfilemetadata
+    using:
+      foreign_key_constraint_on:
+        column: textFileId
+        table:
+          schema: public
+          name: textfilemetadata
+  - name: textimages
+    using:
+      foreign_key_constraint_on:
+        column: textFileId
+        table:
+          schema: public
+          name: textimages
 - table:
     schema: public
     name: textimages
+  object_relationships:
+  - name: textfile
+    using:
+      foreign_key_constraint_on: textFileId
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
 - table:
     schema: public
     name: texts
+  object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
   array_relationships:
+  - name: audiosets
+    using:
+      foreign_key_constraint_on:
+        column: textId
+        table:
+          schema: public
+          name: audiosets
+  - name: text_audiosets
+    using:
+      foreign_key_constraint_on:
+        column: textId
+        table:
+          schema: public
+          name: audiosets
   - name: texts_textfiles
     using:
       manual_configuration:
@@ -95,14 +307,123 @@ tables:
           id: textId
 - table:
     schema: public
+    name: user_roles
+  object_relationships:
+  - name: roleByRole
+    using:
+      foreign_key_constraint_on: role
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
+- table:
+    schema: public
     name: users
   array_relationships:
+  - name: affixes
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          schema: public
+          name: affixes
+  - name: audiofiles
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          schema: public
+          name: audiofiles
+  - name: audiosets
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          schema: public
+          name: audiosets
+  - name: bibliographies
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          schema: public
+          name: bibliographies
+  - name: elicitationfiles
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          schema: public
+          name: elicitationfiles
+  - name: elicitationsets
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          schema: public
+          name: elicitationsets
+  - name: roots
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          schema: public
+          name: roots
+  - name: spellings
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          schema: public
+          name: spellings
+  - name: stems
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          schema: public
+          name: stems
+  - name: textfiles
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          schema: public
+          name: textfiles
+  - name: textimages
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          schema: public
+          name: textimages
+  - name: texts
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          schema: public
+          name: texts
+  - name: user_roles
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          schema: public
+          name: user_roles
   - name: users_roots
     using:
       manual_configuration:
         remote_table:
           schema: public
           name: roots
+        column_mapping:
+          id: userId
+  - name: users_stems
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: stems
         column_mapping:
           id: userId
 - table:

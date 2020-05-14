@@ -1,0 +1,48 @@
+- args:
+    role: user
+    table:
+      name: affixes
+      schema: public
+  type: drop_insert_permission
+- args:
+    permission:
+      check:
+        _exists:
+          _table:
+            name: user_roles
+            schema: public
+          _where:
+            _and:
+            - userId:
+                _eq: X-Hasura-User-Id
+            - role:
+                _eq: admin
+      columns:
+      - id
+      - prevId
+      - userId
+      - active
+      - editnote
+      - english
+      - link
+      - nicodemus
+      - page
+      - salish
+      - type
+      - createdAt
+      - updatedAt
+      localPresets:
+      - key: createdAt
+        value: now()
+      - key: updatedAt
+        value: now()
+      - key: ""
+        value: ""
+      set:
+        createdAt: now()
+        updatedAt: now()
+    role: user
+    table:
+      name: affixes
+      schema: public
+  type: create_insert_permission
