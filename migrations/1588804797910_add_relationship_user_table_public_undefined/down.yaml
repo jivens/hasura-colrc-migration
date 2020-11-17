@@ -1,6 +1,0 @@
-- args:
-    relationship: user
-    table:
-      name: elicitationsets
-      schema: public
-  type: drop_relationship

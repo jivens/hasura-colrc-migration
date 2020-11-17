@@ -1,6 +1,0 @@
-- args:
-    relationship: audiofiles_audiosets
-    table:
-      name: audiofiles
-      schema: public
-  type: drop_relationship

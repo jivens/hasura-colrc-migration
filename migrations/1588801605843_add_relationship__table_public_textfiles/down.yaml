@@ -1,6 +1,0 @@
-- args:
-    relationship: textfilemetadata
-    table:
-      name: textfiles
-      schema: public
-  type: drop_relationship

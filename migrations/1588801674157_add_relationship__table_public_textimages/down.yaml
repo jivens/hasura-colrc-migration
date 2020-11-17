@@ -1,6 +1,0 @@
-- args:
-    relationship: textfile
-    table:
-      name: textimages
-      schema: public
-  type: drop_relationship

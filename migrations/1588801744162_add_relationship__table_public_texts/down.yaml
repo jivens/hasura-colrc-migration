@@ -1,6 +1,0 @@
-- args:
-    relationship: audiosets
-    table:
-      name: texts
-      schema: public
-  type: drop_relationship

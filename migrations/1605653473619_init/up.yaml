@@ -1,0 +1,2511 @@
+- args:
+    functions:
+    - function:
+        name: fetch_audit_usernames
+        schema: audit
+    - function:
+        name: fetch_audit_usernames
+        schema: public
+    - configuration:
+        session_argument: hasura_session
+      function:
+        name: get_session_role
+        schema: public
+    tables:
+    - computed_fields:
+      - comment: ""
+        definition:
+          function:
+            name: fetch_audit_usernames
+            schema: audit
+        name: audit_user
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - event_id
+          - schema_name
+          - table_name
+          - relid
+          - session_user_name
+          - hasura_user
+          - action_tstamp_tx
+          - action_tstamp_stm
+          - action_tstamp_clk
+          - transaction_id
+          - application_name
+          - client_addr
+          - client_port
+          - client_query
+          - action
+          - row_data
+          - changed_fields
+          - statement_only
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - hasura_user
+          - action
+          - application_name
+          - schema_name
+          - transaction_id
+          - client_addr
+          - session_user_name
+          - changed_fields
+          - table_name
+          - row_data
+          - client_port
+          - action_tstamp_stm
+          - relid
+          - statement_only
+          - client_query
+          - action_tstamp_tx
+          - event_id
+          - action_tstamp_clk
+          filter: {}
+        role: update
+      table:
+        name: logged_actions
+        schema: audit
+    - table:
+        name: tableslist
+        schema: audit
+    - array_relationships:
+      - name: affixes
+        using:
+          foreign_key_constraint_on:
+            column: type
+            table:
+              name: affixes
+              schema: public
+      delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+        role: update
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: affix_types
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+        role: manager
+      - permission:
+          check: {}
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+        role: update
+    - delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - type
+          - userId
+          - editnote
+          - english
+          - link
+          - nicodemus
+          - page
+          - salish
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - type
+          - userId
+          - editnote
+          - english
+          - link
+          - nicodemus
+          - page
+          - salish
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+      object_relationships:
+      - name: affix_type
+        using:
+          foreign_key_constraint_on: type
+      - name: user
+        using:
+          foreign_key_constraint_on: userId
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - type
+          - salish
+          - nicodemus
+          - english
+          - link
+          - page
+          - editnote
+          - userId
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - type
+          - userId
+          - editnote
+          - english
+          - link
+          - nicodemus
+          - page
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - type
+          - userId
+          - editnote
+          - english
+          - link
+          - nicodemus
+          - page
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - type
+          - userId
+          - editnote
+          - english
+          - link
+          - nicodemus
+          - page
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: affixes
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns:
+          - id
+          - type
+          - userId
+          - editnote
+          - english
+          - link
+          - nicodemus
+          - page
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          check: {}
+          columns:
+          - id
+          - type
+          - userId
+          - editnote
+          - english
+          - link
+          - nicodemus
+          - page
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+    - computed_fields:
+      - comment: ""
+        definition:
+          function:
+            name: audio_with_path
+            schema: public
+        name: audio_with_path
+      delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - subdir
+          - src
+          - type
+          - direct
+          - audiosetId
+          - userId
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - audiosetId
+          - id
+          - userId
+          - direct
+          - src
+          - subdir
+          - type
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+      object_relationships:
+      - name: audiofiles_audiosets
+        using:
+          manual_configuration:
+            column_mapping:
+              audiosetId: id
+            remote_table:
+              name: audiosets
+              schema: public
+      - name: user
+        using:
+          foreign_key_constraint_on: userId
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - audiosetId
+          - id
+          - userId
+          - direct
+          - src
+          - subdir
+          - type
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          allow_aggregations: true
+          columns:
+          - audiosetId
+          - id
+          - userId
+          - direct
+          - src
+          - subdir
+          - type
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - audiosetId
+          - id
+          - userId
+          - direct
+          - src
+          - subdir
+          - type
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          columns:
+          - audiosetId
+          - id
+          - userId
+          - direct
+          - src
+          - subdir
+          - type
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: audiofiles
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns: []
+          filter: {}
+        role: manager
+      - permission:
+          check: null
+          columns: []
+          filter: {}
+        role: update
+    - delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns: []
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns: []
+        role: update
+      object_relationships:
+      - name: audioset
+        using:
+          foreign_key_constraint_on: audioSetId
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - audioSetId
+          - metadata
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          columns:
+          - audioSetId
+          - id
+          - metadata
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - audioSetId
+          - id
+          - metadata
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          allow_aggregations: true
+          columns:
+          - audioSetId
+          - id
+          - metadata
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: audiosetmetadata
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns: []
+          filter: {}
+        role: manager
+      - permission:
+          check: null
+          columns: []
+          filter: {}
+        role: update
+    - array_relationships:
+      - name: audiosetmetadata
+        using:
+          foreign_key_constraint_on:
+            column: audioSetId
+            table:
+              name: audiosetmetadata
+              schema: public
+      - name: audiosets_audiofiles
+        using:
+          manual_configuration:
+            column_mapping:
+              id: audiosetId
+            remote_table:
+              name: audiofiles
+              schema: public
+      delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns: []
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns: []
+        role: update
+      object_relationships:
+      - name: text
+        using:
+          foreign_key_constraint_on: textId
+      - name: user
+        using:
+          foreign_key_constraint_on: userId
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - title
+          - speaker
+          - textId
+          - userId
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          columns:
+          - id
+          - textId
+          - userId
+          - speaker
+          - title
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - textId
+          - userId
+          - speaker
+          - title
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          columns:
+          - id
+          - textId
+          - userId
+          - speaker
+          - title
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: audiosets
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns: []
+          filter: {}
+        role: manager
+      - permission:
+          check: null
+          columns: []
+          filter: {}
+        role: update
+    - table:
+        name: bibliographies
+        schema: public
+    - delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - orthography
+          - voice
+          - manner
+          - secondary
+          - labial
+          - alveolar
+          - alveopalatal
+          - lateral
+          - palatal
+          - velar
+          - uvular
+          - glottal
+          - pharyngeal
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - alveolar
+          - alveopalatal
+          - glottal
+          - labial
+          - lateral
+          - manner
+          - orthography
+          - palatal
+          - pharyngeal
+          - secondary
+          - uvular
+          - velar
+          - voice
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+        role: update
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - alveolar
+          - alveopalatal
+          - glottal
+          - labial
+          - lateral
+          - manner
+          - orthography
+          - palatal
+          - pharyngeal
+          - secondary
+          - uvular
+          - velar
+          - voice
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - alveolar
+          - alveopalatal
+          - glottal
+          - labial
+          - lateral
+          - manner
+          - orthography
+          - palatal
+          - pharyngeal
+          - secondary
+          - uvular
+          - velar
+          - voice
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - alveolar
+          - alveopalatal
+          - glottal
+          - labial
+          - lateral
+          - manner
+          - orthography
+          - palatal
+          - pharyngeal
+          - secondary
+          - uvular
+          - velar
+          - voice
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - alveolar
+          - alveopalatal
+          - glottal
+          - labial
+          - lateral
+          - manner
+          - orthography
+          - palatal
+          - pharyngeal
+          - secondary
+          - uvular
+          - velar
+          - voice
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: consonants
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns:
+          - id
+          - alveolar
+          - alveopalatal
+          - glottal
+          - labial
+          - lateral
+          - manner
+          - orthography
+          - palatal
+          - pharyngeal
+          - secondary
+          - uvular
+          - velar
+          - voice
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+        role: manager
+      - permission:
+          check: null
+          columns:
+          - id
+          - alveolar
+          - alveopalatal
+          - glottal
+          - labial
+          - lateral
+          - manner
+          - orthography
+          - palatal
+          - pharyngeal
+          - secondary
+          - uvular
+          - velar
+          - voice
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+        role: update
+    - computed_fields:
+      - comment: ""
+        definition:
+          function:
+            name: elicitationfiles_with_path
+            schema: public
+        name: elicitationfiles_with_path
+      delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - src
+          - type
+          - direct
+          - elicitationSetId
+          - userId
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - elicitationSetId
+          - id
+          - userId
+          - direct
+          - src
+          - type
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+      object_relationships:
+      - name: elicitationset
+        using:
+          foreign_key_constraint_on: elicitationSetId
+      - name: user
+        using:
+          foreign_key_constraint_on: userId
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - elicitationSetId
+          - id
+          - userId
+          - direct
+          - src
+          - type
+          - createdAt
+          - updatedAt
+          computed_fields:
+          - elicitationfiles_with_path
+          filter: {}
+        role: anonymous
+      - permission:
+          allow_aggregations: true
+          columns:
+          - elicitationSetId
+          - id
+          - userId
+          - direct
+          - src
+          - type
+          - createdAt
+          - updatedAt
+          computed_fields:
+          - elicitationfiles_with_path
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - elicitationSetId
+          - id
+          - userId
+          - direct
+          - src
+          - type
+          - createdAt
+          - updatedAt
+          computed_fields:
+          - elicitationfiles_with_path
+          filter: {}
+        role: update
+      - permission:
+          allow_aggregations: true
+          columns:
+          - elicitationSetId
+          - id
+          - userId
+          - direct
+          - src
+          - type
+          - createdAt
+          - updatedAt
+          computed_fields:
+          - elicitationfiles_with_path
+          filter: {}
+        role: view
+      table:
+        name: elicitationfiles
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns:
+          - elicitationSetId
+          - id
+          - userId
+          - direct
+          - src
+          - type
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          check: null
+          columns:
+          - elicitationSetId
+          - id
+          - userId
+          - direct
+          - src
+          - type
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+    - array_relationships:
+      - name: elicitationfiles
+        using:
+          foreign_key_constraint_on:
+            column: elicitationSetId
+            table:
+              name: elicitationfiles
+              schema: public
+      delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - title
+          - language
+          - speaker
+          - transcription
+          - editnote
+          - userId
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - userId
+          - editnote
+          - language
+          - speaker
+          - title
+          - transcription
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+      object_relationships:
+      - name: user
+        using:
+          foreign_key_constraint_on: userId
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - userId
+          - editnote
+          - language
+          - speaker
+          - title
+          - transcription
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - userId
+          - editnote
+          - language
+          - speaker
+          - title
+          - transcription
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - userId
+          - editnote
+          - language
+          - speaker
+          - title
+          - transcription
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - userId
+          - editnote
+          - language
+          - speaker
+          - title
+          - transcription
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: elicitationsets
+        schema: public
+      update_permissions:
+      - permission:
+          check: {}
+          columns:
+          - id
+          - userId
+          - editnote
+          - language
+          - speaker
+          - title
+          - transcription
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          check: {}
+          columns:
+          - id
+          - userId
+          - editnote
+          - language
+          - speaker
+          - title
+          - transcription
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+    - array_relationships:
+      - name: user_roles
+        using:
+          foreign_key_constraint_on:
+            column: roleId
+            table:
+              name: user_roles
+              schema: public
+      table:
+        name: roles
+        schema: public
+    - delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          check: {}
+          columns:
+          - id
+          - root
+          - number
+          - sense
+          - salish
+          - nicodemus
+          - symbol
+          - english
+          - grammar
+          - crossref
+          - variant
+          - cognate
+          - editnote
+          - userId
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - number
+          - userId
+          - cognate
+          - crossref
+          - editnote
+          - english
+          - grammar
+          - nicodemus
+          - root
+          - salish
+          - sense
+          - symbol
+          - variant
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+      object_relationships:
+      - name: user
+        using:
+          foreign_key_constraint_on: userId
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - root
+          - number
+          - sense
+          - salish
+          - nicodemus
+          - symbol
+          - english
+          - grammar
+          - crossref
+          - variant
+          - cognate
+          - editnote
+          - userId
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - number
+          - userId
+          - cognate
+          - crossref
+          - editnote
+          - english
+          - grammar
+          - nicodemus
+          - root
+          - salish
+          - sense
+          - symbol
+          - variant
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - number
+          - userId
+          - cognate
+          - crossref
+          - editnote
+          - english
+          - grammar
+          - nicodemus
+          - root
+          - salish
+          - sense
+          - symbol
+          - variant
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - number
+          - userId
+          - cognate
+          - crossref
+          - editnote
+          - english
+          - grammar
+          - nicodemus
+          - root
+          - salish
+          - sense
+          - symbol
+          - variant
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: roots
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns:
+          - id
+          - number
+          - userId
+          - cognate
+          - crossref
+          - editnote
+          - english
+          - grammar
+          - nicodemus
+          - root
+          - salish
+          - sense
+          - symbol
+          - variant
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          check: {}
+          columns:
+          - id
+          - number
+          - userId
+          - cognate
+          - crossref
+          - editnote
+          - english
+          - grammar
+          - nicodemus
+          - root
+          - salish
+          - sense
+          - symbol
+          - variant
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+    - table:
+        name: session_table
+        schema: public
+    - delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - reichard
+          - nicodemus
+          - salish
+          - english
+          - note
+          - userId
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - userId
+          - english
+          - nicodemus
+          - note
+          - reichard
+          - salish
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+      object_relationships:
+      - name: user
+        using:
+          foreign_key_constraint_on: userId
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - userId
+          - english
+          - nicodemus
+          - note
+          - reichard
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          columns:
+          - id
+          - userId
+          - english
+          - nicodemus
+          - note
+          - reichard
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          columns:
+          - id
+          - userId
+          - english
+          - nicodemus
+          - note
+          - reichard
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - userId
+          - english
+          - nicodemus
+          - note
+          - reichard
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: spellings
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns:
+          - id
+          - userId
+          - english
+          - nicodemus
+          - note
+          - reichard
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          check: null
+          columns:
+          - id
+          - userId
+          - english
+          - nicodemus
+          - note
+          - reichard
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+    - array_relationships:
+      - name: stems
+        using:
+          foreign_key_constraint_on:
+            column: category
+            table:
+              name: stems
+              schema: public
+      delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+        role: update
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: stem_categories
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+        role: manager
+      - permission:
+          check: null
+          columns:
+          - id
+          - value
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+        role: update
+    - delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - category
+          - reichard
+          - doak
+          - salish
+          - nicodemus
+          - english
+          - note
+          - editnote
+          - userId
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - userId
+          - category
+          - doak
+          - editnote
+          - english
+          - nicodemus
+          - note
+          - reichard
+          - salish
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+      object_relationships:
+      - name: stem_category
+        using:
+          foreign_key_constraint_on: category
+      - name: user
+        using:
+          foreign_key_constraint_on: userId
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - userId
+          - category
+          - doak
+          - editnote
+          - english
+          - nicodemus
+          - note
+          - reichard
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - userId
+          - category
+          - doak
+          - editnote
+          - english
+          - nicodemus
+          - note
+          - reichard
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - userId
+          - category
+          - doak
+          - editnote
+          - english
+          - nicodemus
+          - note
+          - reichard
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - userId
+          - category
+          - doak
+          - editnote
+          - english
+          - nicodemus
+          - note
+          - reichard
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: stems
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns:
+          - id
+          - userId
+          - category
+          - doak
+          - editnote
+          - english
+          - nicodemus
+          - note
+          - reichard
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          check: null
+          columns:
+          - id
+          - userId
+          - category
+          - doak
+          - editnote
+          - english
+          - nicodemus
+          - note
+          - reichard
+          - salish
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+    - select_permissions:
+      - permission:
+          columns:
+          - result
+          filter: {}
+        role: manager
+      table:
+        name: text_result
+        schema: public
+    - delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns: []
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns: []
+        role: update
+      object_relationships:
+      - name: textfile
+        using:
+          foreign_key_constraint_on: textFileId
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - textFileId
+          - metadata
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - textFileId
+          - metadata
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - textFileId
+          - metadata
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - textFileId
+          - metadata
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: textfilemetadata
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns: []
+          filter: {}
+        role: manager
+      - permission:
+          check: null
+          columns: []
+          filter: {}
+        role: update
+    - array_relationships:
+      - name: textfilemetadata
+        using:
+          foreign_key_constraint_on:
+            column: textFileId
+            table:
+              name: textfilemetadata
+              schema: public
+      - name: textimages
+        using:
+          foreign_key_constraint_on:
+            column: textFileId
+            table:
+              name: textimages
+              schema: public
+      computed_fields:
+      - comment: ""
+        definition:
+          function:
+            name: textfile_with_path
+            schema: public
+        name: textfile_with_path
+      delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns: []
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns: []
+        role: update
+      object_relationships:
+      - name: textfiles_texts
+        using:
+          manual_configuration:
+            column_mapping:
+              textId: id
+            remote_table:
+              name: texts
+              schema: public
+      - name: user
+        using:
+          foreign_key_constraint_on: userId
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - subdir
+          - src
+          - resType
+          - msType
+          - fileType
+          - textId
+          - userId
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - textId
+          - userId
+          - fileType
+          - msType
+          - resType
+          - src
+          - subdir
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - textId
+          - userId
+          - fileType
+          - msType
+          - resType
+          - src
+          - subdir
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - textId
+          - userId
+          - fileType
+          - msType
+          - resType
+          - src
+          - subdir
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: textfiles
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns: []
+          filter: {}
+        role: manager
+      - permission:
+          check: null
+          columns: []
+          filter: {}
+        role: update
+    - computed_fields:
+      - comment: ""
+        definition:
+          function:
+            name: textimage_with_path
+            schema: public
+        name: textimage_with_path
+      delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns: []
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns: []
+        role: update
+      object_relationships:
+      - name: textfile
+        using:
+          foreign_key_constraint_on: textFileId
+      - name: user
+        using:
+          foreign_key_constraint_on: userId
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - subdir
+          - src
+          - textFileId
+          - userId
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - textFileId
+          - userId
+          - src
+          - subdir
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - textFileId
+          - userId
+          - src
+          - subdir
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - textFileId
+          - userId
+          - src
+          - subdir
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: textimages
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns: []
+          filter: {}
+        role: manager
+      - permission:
+          check: null
+          columns: []
+          filter: {}
+        role: update
+    - array_relationships:
+      - name: audiosets
+        using:
+          foreign_key_constraint_on:
+            column: textId
+            table:
+              name: audiosets
+              schema: public
+      - name: texts_textfiles
+        using:
+          manual_configuration:
+            column_mapping:
+              id: textId
+            remote_table:
+              name: textfiles
+              schema: public
+      delete_permissions:
+      - permission:
+          filter: {}
+        role: manager
+      - permission:
+          filter: {}
+        role: update
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - userId
+          - cycle
+          - rnumber
+          - speaker
+          - title
+          - tnumber
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - userId
+          - cycle
+          - rnumber
+          - speaker
+          - title
+          - tnumber
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+      object_relationships:
+      - name: user
+        using:
+          foreign_key_constraint_on: userId
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - title
+          - speaker
+          - cycle
+          - rnumber
+          - tnumber
+          - userId
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - userId
+          - cycle
+          - rnumber
+          - speaker
+          - title
+          - tnumber
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - userId
+          - cycle
+          - rnumber
+          - speaker
+          - title
+          - tnumber
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - userId
+          - cycle
+          - rnumber
+          - speaker
+          - title
+          - tnumber
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: texts
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns:
+          - id
+          - userId
+          - cycle
+          - rnumber
+          - speaker
+          - title
+          - tnumber
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: manager
+      - permission:
+          check: null
+          columns:
+          - id
+          - userId
+          - cycle
+          - rnumber
+          - speaker
+          - title
+          - tnumber
+          - createdAt
+          - updatedAt
+          filter: {}
+          set:
+            createdAt: now()
+            updatedAt: now()
+            userId: x-hasura-User-Id
+        role: update
+    - insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - userId
+          - roleId
+          - createdAt
+          - updatedAt
+        role: manager
+      object_relationships:
+      - name: role
+        using:
+          foreign_key_constraint_on: roleId
+      - name: user
+        using:
+          foreign_key_constraint_on: userId
+      select_permissions:
+      - permission:
+          allow_aggregations: true
+          columns:
+          - roleId
+          - userId
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          columns:
+          - userId
+          - roleId
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      table:
+        name: user_roles
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns:
+          - roleId
+          - userId
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+    - array_relationships:
+      - name: affixes
+        using:
+          foreign_key_constraint_on:
+            column: userId
+            table:
+              name: affixes
+              schema: public
+      - name: audiofiles
+        using:
+          foreign_key_constraint_on:
+            column: userId
+            table:
+              name: audiofiles
+              schema: public
+      - name: audiosets
+        using:
+          foreign_key_constraint_on:
+            column: userId
+            table:
+              name: audiosets
+              schema: public
+      - name: elicitationfiles
+        using:
+          foreign_key_constraint_on:
+            column: userId
+            table:
+              name: elicitationfiles
+              schema: public
+      - name: elicitationsets
+        using:
+          foreign_key_constraint_on:
+            column: userId
+            table:
+              name: elicitationsets
+              schema: public
+      - name: spellings
+        using:
+          foreign_key_constraint_on:
+            column: userId
+            table:
+              name: spellings
+              schema: public
+      - name: stems
+        using:
+          foreign_key_constraint_on:
+            column: userId
+            table:
+              name: stems
+              schema: public
+      - name: textfiles
+        using:
+          foreign_key_constraint_on:
+            column: userId
+            table:
+              name: textfiles
+              schema: public
+      - name: textimages
+        using:
+          foreign_key_constraint_on:
+            column: userId
+            table:
+              name: textimages
+              schema: public
+      - name: texts
+        using:
+          foreign_key_constraint_on:
+            column: userId
+            table:
+              name: texts
+              schema: public
+      - name: user_roles
+        using:
+          foreign_key_constraint_on:
+            column: userId
+            table:
+              name: user_roles
+              schema: public
+      - name: users_roots
+        using:
+          manual_configuration:
+            column_mapping:
+              id: userId
+            remote_table:
+              name: roots
+              schema: public
+      insert_permissions:
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - first
+          - last
+          - username
+          - email
+          - password
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+        role: anonymous
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - first
+          - last
+          - username
+          - email
+          - password
+          - createdAt
+          - updatedAt
+        role: manager
+      - permission:
+          backend_only: false
+          check: {}
+          columns:
+          - id
+          - first
+          - last
+          - username
+          - email
+          - password
+          - createdAt
+          - updatedAt
+          set:
+            createdAt: now()
+            updatedAt: now()
+        role: update
+      select_permissions:
+      - permission:
+          columns:
+          - id
+          - first
+          - last
+          - username
+          - email
+          - password
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: anonymous
+      - permission:
+          allow_aggregations: true
+          columns:
+          - id
+          - email
+          - first
+          - last
+          - password
+          - username
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+      - permission:
+          columns:
+          - id
+          - email
+          - first
+          - last
+          - password
+          - username
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: update
+      - permission:
+          columns:
+          - id
+          - email
+          - first
+          - last
+          - password
+          - username
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: view
+      table:
+        name: users
+        schema: public
+      update_permissions:
+      - permission:
+          check: null
+          columns:
+          - id
+          - email
+          - first
+          - last
+          - password
+          - username
+          - createdAt
+          - updatedAt
+          filter: {}
+        role: manager
+    - table:
+        name: vowels
+        schema: public
+    version: 2
+  type: replace_metadata

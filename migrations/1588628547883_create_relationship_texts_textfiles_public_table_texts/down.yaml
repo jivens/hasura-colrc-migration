@@ -1,6 +1,0 @@
-- args:
-    relationship: texts_textfiles
-    table:
-      name: texts
-      schema: public
-  type: drop_relationship

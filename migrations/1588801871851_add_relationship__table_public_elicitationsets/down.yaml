@@ -1,6 +1,0 @@
-- args:
-    relationship: elicitationfiles
-    table:
-      name: elicitationsets
-      schema: public
-  type: drop_relationship
